@@ -14,21 +14,16 @@ jobs:
           ref: master
 
       # - name: SFTP Sync
-      - name: deploy file
-        uses: sahilNR/release-upload-sftp@v4
+      - name: FTP Deployer
+        uses: sand4rt/ftp-deployer@v1.3
         with:
-          package_name: 'demo-package'
-          username: 'root'
-          server: '${{ secrets.server }}'
-          port: 22
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: './public'
-          remote_path: '/var/action'
-        # uses: swillner/sftp-sync-action@v1.0
-        # with:
-        #   server: ${{secrets.server}}
-        #   user: root
-        #   user_private_key: "${{ secrets.SSH_PRIVATE_KEY }}"
-        #   host_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpcqJBY326kxZE8GiarAmKks4nva4a6RbGY9UCxaw5rcN8Pz7swk51kIiN4SWRRvxIHL6M9X7154TdJ0506EcDWfHc1Z62iO45oFXxnzfN8tVnX48pxn6uzOcJl62YXNy+B2B1BXe/kS9UWdUiJeeizCwM+wMVVcLy6eau2VvBbP6trUxh8sKHZx2Nc95qpI+axI2z9nMQxt3I9ELIOsfLRTllptgLgwvC7z/hsLCvw+r6DbpKuuIP9ixOzZ+U0Fl0IY/0YqMXJW1BlCkCHXQB8bxKD6JDwCcpoz4anU9qb1LGzMGwW6GsuIZ6cYx3TBiI4NapbLe9g7Z6Qhuvky05ngF9B87Cajri/H8P2943KEyV97HRi0q6We4WmaxjZSdcGSLzsLx8ahmDQRmUv1Pi9cHhoX8azxljmsDBHMKJXDrBQmKwdONzMcYbxw0oecI8OheR5VekGz3mF5n85iuo0RmHzBUX5YIvh6JJ8lHrXpJRtLZprOclQXnLOHxSOlk="
-        #   remote: /home/root/upload
-        #   mirror_options: "--exclude-glob=.git*/ --verbose"
+          sftp: false # optional
+          host: ${{ secrets.server }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
+          port: 21 # optional, default is: 21
+          username: root # FTP username
+          password: ${{ secrets.PASSWORD }} # FTP password
+          remote_folder: '/var/action' # optional, remote path of your FTP server
+          local_folder: public # optional, local path, default is: dist
+          cleanup: false # optional, remove existing files inside FTP remote folder
+          exclude: ['node_modules/**'] # optional, e.g. ['node_modules/**', '.git/**', '*.env']
+          pasive: true # optional
