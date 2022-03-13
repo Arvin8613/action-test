@@ -21,4 +21,5 @@ jobs:
           port: 21
           username: root
           password: ${{ secrets.PASSWORD }}
+          local_folder: public
           remote_folder: '/var/action'
