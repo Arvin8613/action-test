@@ -22,4 +22,3 @@ jobs:
           username: root
           password: ${{ secrets.PASSWORD }}
           remote_folder: '/var/action'
-          exclude: ['node_modules/**']
