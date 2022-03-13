@@ -17,7 +17,7 @@ jobs:
         uses: sand4rt/ftp-deployer@v1.3
         with:
           sftp: false
-          host: ${{ secrets.server }}
+          host: ${{ secrets.SERVER }}
           port: 21
           username: root
           password: ${{ secrets.PASSWORD }}
