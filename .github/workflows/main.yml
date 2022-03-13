@@ -15,14 +15,15 @@ jobs:
 
       # - name: SFTP Sync
       - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        uses: sahilNR/release-upload-sftp@v4
         with:
+          package_name: 'demo-package'
           username: 'root'
-          server: ${{ secrets.server }}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          local_path: './static/*'
-          remote_path: '/var/www/app'
-          args: '-o ConnectTimeout=5'
+          server: '${{ secrets.server }}'
+          port: 22
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: './public'
+          remote_path: '/var/action'
         # uses: swillner/sftp-sync-action@v1.0
         # with:
         #   server: ${{secrets.server}}
