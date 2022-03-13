@@ -1,4 +1,4 @@
-name: Build and deploy #action名称
+name: Build and deploy
 on:
   push:
     branchs:
@@ -13,17 +13,13 @@ jobs:
         with:
           ref: master
 
-      # - name: SFTP Sync
       - name: FTP Deployer
         uses: sand4rt/ftp-deployer@v1.3
         with:
-          sftp: false # optional
-          host: ${{ secrets.server }} # e.g. ftp.host.com or sftp.host.com (without ftp:// or ftps://)
-          port: 21 # optional, default is: 21
-          username: root # FTP username
-          password: ${{ secrets.PASSWORD }} # FTP password
-          remote_folder: '/var/action' # optional, remote path of your FTP server
-          local_folder: public # optional, local path, default is: dist
-          cleanup: false # optional, remove existing files inside FTP remote folder
-          exclude: ['node_modules/**'] # optional, e.g. ['node_modules/**', '.git/**', '*.env']
-          pasive: true # optional
+          sftp: false
+          host: ${{ secrets.server }}
+          port: 21
+          username: root
+          password: ${{ secrets.PASSWORD }}
+          remote_folder: '/var/action'
+          exclude: ['node_modules/**']
