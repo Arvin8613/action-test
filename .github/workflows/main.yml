@@ -18,13 +18,8 @@ jobs:
       - name: Build
         run: yarn build
 
-      # 利用action把build好的文件上传到服务器/var/www/react-app路径下,需要确认此目录已在服务端创建
       - name: deploy file to server
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        uses: Atyn/Simple-SFTP
         with:
-          server: '175.178.183.147'
-          username: 'root'
-          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
-          local_path: './public/*'
-          remote_path: '/var/www/app'
-          args: '-o ConnectTimeout=5'
+          url: sftp://root:${{secrets.PASSWORD}}@${{secrets.server}}/var/action
+          local-directory: public
