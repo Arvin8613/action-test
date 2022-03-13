@@ -1,7 +1,7 @@
 name: Build and deploy #action名称
 on:
   pull_request:
-  types: [auto_merge_enabled]
+    types: [auto_merge_enabled]
 
 jobs:
   deploy_job:
