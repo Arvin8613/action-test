@@ -24,7 +24,7 @@ jobs:
         with:
           server: '175.178.183.147'
           username: 'root'
-          user_private_key: '${{ secrets.USER_PRIVATE_KEY }}'
+          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
           local_path: './public/*'
           remote_path: '/var/www/app'
           args: '-o ConnectTimeout=5'
