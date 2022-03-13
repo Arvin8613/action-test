@@ -11,7 +11,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          path: main
+          ref: master
 
       - name: Install dependencies
         run: yarn
@@ -22,8 +22,9 @@ jobs:
       - name: deploy file to server
         uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          username: 'root' #ssh user name
-          server: '${{ secrets.SERVER_IP }}' #引用之前创建好的secret
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} #引用之前创建好的secret
-          local_path: './build/*' # 对应我们项目build的文件夹路径
-          remote_path: '/var/www/react-app'
+          server: '175.178.183.147'
+          user: 'root'
+          user_private_key: '${{ secrets.USER_PRIVATE_KEY }}'
+          local_path: './public/*'
+          remote_path: '/var/www/app'
+          args: '-o ConnectTimeout=5'
