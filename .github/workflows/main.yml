@@ -1,0 +1,30 @@
+name: Build and deploy #action名称
+on:
+  pull_request:
+  types: [auto_merge_enabled]
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: master
+
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+
+      # 利用action把build好的文件上传到服务器/var/www/react-app路径下,需要确认此目录已在服务端创建
+      - name: deploy file to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          server: '175.178.183.147'
+          user: 'root'
+          user_private_key: '${{ secrets.USER_PRIVATE_KEY }}'
+          local_path: './public/*'
+          remote_path: '/var/www/app'
+          args: '-o ConnectTimeout=5'
