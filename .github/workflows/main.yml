@@ -1,8 +1,8 @@
 name: Build and deploy #action名称
 on:
-  pull_request:
-    types: [auto_merge_enabled]
-
+  push:
+    branchs:
+      - 'master'
 jobs:
   deploy_job:
     runs-on: ubuntu-latest
