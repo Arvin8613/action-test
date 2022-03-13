@@ -18,8 +18,12 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: deploy file to server
-        uses: Atyn/Simple-SFTP
+      - name: SFTP Sync
+        uses: swillner/sftp-sync-action@v1.0
         with:
-          url: sftp://root:${{secrets.PASSWORD}}@${{secrets.server}}/var/action
-          local-directory: public
+          server: ${{secrets.server}}
+          user: root
+          user_private_key: "${{ secrets.USER_PRIVATE_KEY }}"
+          host_public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCpcqJBY326kxZE8GiarAmKks4nva4a6RbGY9UCxaw5rcN8Pz7swk51kIiN4SWRRvxIHL6M9X7154TdJ0506EcDWfHc1Z62iO45oFXxnzfN8tVnX48pxn6uzOcJl62YXNy+B2B1BXe/kS9UWdUiJeeizCwM+wMVVcLy6eau2VvBbP6trUxh8sKHZx2Nc95qpI+axI2z9nMQxt3I9ELIOsfLRTllptgLgwvC7z/hsLCvw+r6DbpKuuIP9ixOzZ+U0Fl0IY/0YqMXJW1BlCkCHXQB8bxKD6JDwCcpoz4anU9qb1LGzMGwW6GsuIZ6cYx3TBiI4NapbLe9g7Z6Qhuvky05ngF9B87Cajri/H8P2943KEyV97HRi0q6We4WmaxjZSdcGSLzsLx8ahmDQRmUv1Pi9cHhoX8azxljmsDBHMKJXDrBQmKwdONzMcYbxw0oecI8OheR5VekGz3mF5n85iuo0RmHzBUX5YIvh6JJ8lHrXpJRtLZprOclQXnLOHxSOlk= root@VM-8-16-centos"
+          remote: /home/root/upload
+          mirror_options: "--exclude-glob=.git*/ --verbose"
