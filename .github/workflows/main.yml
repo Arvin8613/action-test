@@ -13,11 +13,6 @@ jobs:
         with:
           ref: master
 
-      - name: Install dependencies
-        run: yarn
-      - name: Build
-        run: yarn build
-
       - name: SFTP Sync
         uses: swillner/sftp-sync-action@v1.0
         with:
