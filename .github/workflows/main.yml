@@ -18,4 +18,4 @@ jobs:
       - name: Build
         run: yarn build
       - name: Publish
-        run: sh ./deploy.sh ${{secrets.USER_PRIVATE_KEY}}
+        run: sh ./deploy.sh ${{secrets.SSH_PRIVATE_KEY}}
