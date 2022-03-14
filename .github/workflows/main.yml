@@ -13,12 +13,9 @@ jobs:
         with:
           ref: master
 
-      - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
-        with:
-          username: 'root'
-          server: ${{secrets.SERVER}}
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          local_path: './public/'
-          remote_path: '/var/action'
-          args: '-o ConnectTimeout=5'
+      - name: Install dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+      - name: Publish
+        run: yarn publish
