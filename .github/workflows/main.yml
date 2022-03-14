@@ -13,13 +13,12 @@ jobs:
         with:
           ref: master
 
-      - name: FTP Deployer
-        uses: sand4rt/ftp-deployer@v1.3
+      - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
         with:
-          sftp: false
-          host: ${{ secrets.SERVER }}
-          port: 21
-          username: root
-          password: ${{ secrets.PASSWORD }}
-          local_folder: public
-          remote_folder: '/var/action'
+          username: 'root'
+          server: ${{secrets.SERVER}}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+          local_path: './public/*'
+          remote_path: '/var/www/app'
+          args: '-o ConnectTimeout=5'
