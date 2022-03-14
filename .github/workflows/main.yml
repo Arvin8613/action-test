@@ -20,5 +20,5 @@ jobs:
           server: ${{secrets.SERVER}}
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
           local_path: './public/*'
-          remote_path: '/var/www/app'
+          remote_path: '/var/action'
           args: '-o ConnectTimeout=5'
